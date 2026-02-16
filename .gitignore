@@ -1,0 +1,24 @@
+# Node
+node_modules/
+
+# Build output
+apps/backend/dist/
+apps/backend/coverage/
+apps/frontend/dist/
+
+# Environment
+apps/backend/.env
+apps/backend/.env.*
+!apps/backend/.env.example
+
+# OS/editor
+.vscode/
+.idea/
+*.log
+.DS_Store
+Thumbs.db
+
+# k3d/k8s local temp
+.tmp/
+
+docs/

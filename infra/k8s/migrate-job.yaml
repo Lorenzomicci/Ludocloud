@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ludocloud-migrate
+  namespace: ludocloud
+spec:
+  backoffLimit: 1
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: migrate
+          image: ludocloud-backend:local
+          imagePullPolicy: IfNotPresent
+          command:
+            - sh
+            - -c
+            - npm run prisma:migrate:deploy && npm run prisma:seed
+          envFrom:
+            - configMapRef:
+                name: ludocloud-config
+            - secretRef:
+                name: ludocloud-secret

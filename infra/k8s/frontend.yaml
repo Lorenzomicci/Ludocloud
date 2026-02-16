@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ludocloud-frontend
+  namespace: ludocloud
+spec:
+  selector:
+    app: ludocloud-frontend
+  ports:
+    - port: 80
+      targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ludocloud-frontend
+  namespace: ludocloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ludocloud-frontend
+  template:
+    metadata:
+      labels:
+        app: ludocloud-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: ludocloud-frontend:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "300m"
+              memory: "256Mi"

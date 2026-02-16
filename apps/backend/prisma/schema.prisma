@@ -1,0 +1,146 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  STAFF
+  MEMBER
+}
+
+enum UserStatus {
+  ACTIVE
+  SUSPENDED
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+model User {
+  id            String         @id @default(uuid()) @db.Uuid
+  email         String         @unique
+  passwordHash  String         @map("password_hash")
+  fullName      String         @map("full_name")
+  phone         String?
+  role          UserRole       @default(MEMBER)
+  status        UserStatus     @default(ACTIVE)
+  createdAt     DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
+  member        Member?
+  refreshTokens RefreshToken[]
+  createdBookings Booking[]    @relation("booking_created_by")
+  auditLogs     AuditLog[]     @relation("audit_actor")
+
+  @@map("users")
+}
+
+model Member {
+  id             String    @id @default(uuid()) @db.Uuid
+  userId         String    @unique @map("user_id") @db.Uuid
+  membershipCode String    @unique @map("membership_code")
+  joinedAt       DateTime  @default(now()) @map("joined_at") @db.Timestamptz(6)
+  notes          String?
+  user           User      @relation(fields: [userId], references: [id], onDelete: Restrict)
+  bookings       Booking[]
+
+  @@map("members")
+}
+
+model TableEntity {
+  id        String    @id @default(uuid()) @db.Uuid
+  code      String    @unique
+  capacity  Int
+  zone      String
+  isActive  Boolean   @default(true) @map("is_active")
+  bookings  Booking[]
+
+  @@map("tables")
+}
+
+model BoardGame {
+  id             String        @id @default(uuid()) @db.Uuid
+  title          String        @unique
+  category       String
+  minPlayers     Int           @map("min_players")
+  maxPlayers     Int           @map("max_players")
+  minAge         Int           @map("min_age")
+  durationMin    Int           @map("duration_min")
+  stockTotal     Int           @map("stock_total")
+  stockAvailable Int           @map("stock_available")
+  isActive       Boolean       @default(true) @map("is_active")
+  bookingGames   BookingGame[]
+
+  @@index([title])
+  @@map("board_games")
+}
+
+model Booking {
+  id          String        @id @default(uuid()) @db.Uuid
+  memberId    String        @map("member_id") @db.Uuid
+  tableId     String        @map("table_id") @db.Uuid
+  startAt     DateTime      @map("start_at") @db.Timestamptz(6)
+  endAt       DateTime      @map("end_at") @db.Timestamptz(6)
+  peopleCount Int           @map("people_count")
+  status      BookingStatus @default(PENDING)
+  notes       String?
+  createdBy   String        @map("created_by") @db.Uuid
+  createdAt   DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  member       Member        @relation(fields: [memberId], references: [id], onDelete: Restrict)
+  table        TableEntity   @relation(fields: [tableId], references: [id], onDelete: Restrict)
+  creator      User          @relation("booking_created_by", fields: [createdBy], references: [id], onDelete: Restrict)
+  bookingGames BookingGame[]
+
+  @@index([startAt, tableId])
+  @@map("bookings")
+}
+
+model BookingGame {
+  bookingId   String   @map("booking_id") @db.Uuid
+  boardGameId String   @map("board_game_id") @db.Uuid
+  quantity    Int
+
+  booking   Booking   @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  boardGame BoardGame @relation(fields: [boardGameId], references: [id], onDelete: Restrict)
+
+  @@id([bookingId, boardGameId])
+  @@map("booking_games")
+}
+
+model RefreshToken {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @map("user_id") @db.Uuid
+  tokenHash String    @map("token_hash")
+  expiresAt DateTime  @map("expires_at") @db.Timestamptz(6)
+  revokedAt DateTime? @map("revoked_at") @db.Timestamptz(6)
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@unique([userId, tokenHash])
+  @@map("refresh_tokens")
+}
+
+model AuditLog {
+  id         String   @id @default(uuid()) @db.Uuid
+  actorUserId String? @map("actor_user_id") @db.Uuid
+  action     String
+  entityType String   @map("entity_type")
+  entityId   String?  @map("entity_id")
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  payload    Json?    @map("payload_json")
+
+  actor User? @relation("audit_actor", fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@index([entityType, entityId])
+  @@map("audit_logs")
+}

@@ -1,0 +1,49 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: ludocloud-postgres
+    environment:
+      POSTGRES_DB: ludocloud
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  ludocloud-backend:
+    build:
+      context: ../../
+      dockerfile: infra/docker/backend.Dockerfile
+    container_name: ludocloud-backend
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/ludocloud?schema=public
+      JWT_ACCESS_SECRET: dev_access_secret_change_me
+      JWT_REFRESH_SECRET: dev_refresh_secret_change_me
+      JWT_ACCESS_EXPIRES_IN: 15m
+      JWT_REFRESH_EXPIRES_IN_DAYS: 7
+      CORS_ORIGIN: http://localhost
+      BOOKING_SLOT_MINUTES: 90
+      BOOKING_OPEN_HOUR: 15
+      BOOKING_CLOSE_HOUR: 23
+      BOOKING_MAX_FUTURE_ACTIVE: 3
+      BOOKING_CANCELLATION_HOURS: 2
+      NODE_ENV: production
+      PORT: 3000
+    ports:
+      - "3000:3000"
+
+  ludocloud-frontend:
+    build:
+      context: ../../
+      dockerfile: infra/docker/frontend.Dockerfile
+    container_name: ludocloud-frontend
+    depends_on:
+      - ludocloud-backend
+    ports:
+      - "80:80"
+
+volumes:
+  postgres_data:

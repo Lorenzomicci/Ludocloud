@@ -1,0 +1,19 @@
+{
+  "name": "ludocloud",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Progetto esame Applicazioni Web, Mobile e Cloud - Gestione Ludoteca cloud-native",
+  "scripts": {
+    "install:all": "npm --prefix apps/backend install && npm --prefix apps/frontend install",
+    "dev:backend": "npm --prefix apps/backend run start:dev",
+    "dev:frontend": "npm --prefix apps/frontend run start",
+    "build:backend": "npm --prefix apps/backend run build",
+    "build:frontend": "npm --prefix apps/frontend run build -- --configuration development",
+    "build": "npm run build:backend && npm run build:frontend",
+    "test:backend": "npm --prefix apps/backend run test -- --runInBand",
+    "test:backend:integration": "npm --prefix apps/backend run test:integration",
+    "lint:backend": "npm --prefix apps/backend run lint",
+    "deploy:local": "powershell -ExecutionPolicy Bypass -File ./scripts/deploy-local.ps1",
+    "smoke:test": "powershell -ExecutionPolicy Bypass -File ./scripts/smoke-test.ps1"
+  }
+}

@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ludocloud-backend
+  namespace: ludocloud
+spec:
+  selector:
+    app: ludocloud-backend
+  ports:
+    - port: 3000
+      targetPort: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ludocloud-backend
+  namespace: ludocloud
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ludocloud-backend
+  template:
+    metadata:
+      labels:
+        app: ludocloud-backend
+    spec:
+      containers:
+        - name: backend
+          image: ludocloud-backend:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: ludocloud-config
+            - secretRef:
+                name: ludocloud-secret
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health/ready
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health/live
+              port: 3000
+            initialDelaySeconds: 20
+            periodSeconds: 15
+          resources:
+            requests:
+              cpu: "200m"
+              memory: "256Mi"
+            limits:
+              cpu: "600m"
+              memory: "512Mi"
