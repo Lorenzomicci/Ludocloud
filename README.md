@@ -15,7 +15,6 @@ Applicazione **SPA + backend API + PostgreSQL** per la gestione di una ludoteca,
 - `infra/docker`: Dockerfile e config runtime
 - `infra/k8s`: manifest Kubernetes
 - `scripts`: automazione deploy e smoke test
-- `docs`: relazione tecnica e traccia pitch
 
 ## Avvio locale (sviluppo)
 1. Installazione dipendenze:
