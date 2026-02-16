@@ -1,6 +1,6 @@
 /**
  * File: apps\backend\src\bookings\dto\booking-game-selection.dto.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
+ *   
  */
 
 import { IsInt, IsUUID, Min } from 'class-validator';

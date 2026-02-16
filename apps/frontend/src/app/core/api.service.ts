@@ -1,6 +1,6 @@
 /**
  * File: apps\frontend\src\app\core\api.service.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
+ *   
  */
 
 import { HttpClient } from '@angular/common/http';

@@ -1,6 +1,6 @@
 /**
  * File: apps\frontend\src\app\core\models.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
+ *   
  */
 
 export type UserRole = 'ADMIN' | 'STAFF' | 'MEMBER';

@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\members\members.module.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
  */
 
 import { Module } from '@nestjs/common';

@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\members\members.service.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
  */
 
 import {

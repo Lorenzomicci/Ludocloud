@@ -1,6 +1,6 @@
 /**
  * File: apps\frontend\src\app\layout\shell.component.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
+ *   
  */
 
 import { CommonModule } from '@angular/common';

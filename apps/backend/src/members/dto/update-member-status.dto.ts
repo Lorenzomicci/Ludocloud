@@ -1,6 +1,6 @@
 /**
  * File: apps\backend\src\members\dto\update-member-status.dto.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
+ *   
  */
 
 import { UserStatus } from '@prisma/client';

@@ -1,6 +1,6 @@
 /**
  * File: apps\backend\src\bookings\dto\bookings-query.dto.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
+ *   
  */
 
 import { BookingStatus } from '@prisma/client';

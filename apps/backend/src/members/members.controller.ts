@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\members\members.controller.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
  */
 
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';

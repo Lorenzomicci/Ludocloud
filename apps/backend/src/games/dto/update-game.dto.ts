@@ -1,6 +1,6 @@
 /**
  * File: apps\backend\src\games\dto\update-game.dto.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
+ *   
  */
 
 import {

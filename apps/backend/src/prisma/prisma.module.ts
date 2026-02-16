@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\prisma\prisma.module.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
  */
 
 import { Global, Module } from '@nestjs/common';

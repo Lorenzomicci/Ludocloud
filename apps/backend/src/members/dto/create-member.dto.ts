@@ -1,6 +1,6 @@
 /**
  * File: apps\backend\src\members\dto\create-member.dto.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
+ *   
  */
 
 import {

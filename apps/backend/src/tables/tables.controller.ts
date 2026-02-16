@@ -1,6 +1,6 @@
 /**
  * File: apps\backend\src\tables\tables.controller.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
+ *   
  */
 
 import {

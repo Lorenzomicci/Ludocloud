@@ -1,6 +1,6 @@
 /**
  * File: apps\backend\src\common\decorators\roles.decorator.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
+ *   
  */
 
 import { SetMetadata } from '@nestjs/common';

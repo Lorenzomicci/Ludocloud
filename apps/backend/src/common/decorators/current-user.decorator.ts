@@ -1,6 +1,6 @@
 /**
  * File: apps\backend\src\common\decorators\current-user.decorator.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
+ *   
  */
 
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';

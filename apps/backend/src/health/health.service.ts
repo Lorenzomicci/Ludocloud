@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\health\health.service.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
  */
 
 import { Injectable, ServiceUnavailableException } from '@nestjs/common';

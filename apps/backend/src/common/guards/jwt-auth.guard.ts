@@ -1,6 +1,6 @@
 /**
  * File: apps\backend\src\common\guards\jwt-auth.guard.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
+ *   
  */
 
 import {

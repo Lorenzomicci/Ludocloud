@@ -1,6 +1,6 @@
 /**
  * File: apps\backend\src\tables\dto\table-availability-query.dto.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
+ *   
  */
 
 import { IsISO8601, IsOptional } from 'class-validator';

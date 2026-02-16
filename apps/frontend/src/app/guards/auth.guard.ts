@@ -1,6 +1,6 @@
 /**
  * File: apps\frontend\src\app\guards\auth.guard.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
+ *   
  */
 
 import { CanActivateFn, Router } from '@angular/router';

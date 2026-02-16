@@ -1,6 +1,6 @@
 /**
  * File: apps\backend\src\auth\jwt.strategy.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
+ *   
  */
 
 import { Injectable } from '@nestjs/common';

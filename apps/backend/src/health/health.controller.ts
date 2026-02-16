@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\health\health.controller.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
  */
 
 import { Controller, Get } from '@nestjs/common';

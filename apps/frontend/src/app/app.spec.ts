@@ -1,6 +1,6 @@
 /**
  * File: apps\frontend\src\app\app.spec.ts
- * Scopo: componente applicativa di LudoCloud (annotato per preparazione orale).
+ *   
  */
 
 import { TestBed } from '@angular/core/testing';
