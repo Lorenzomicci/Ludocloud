@@ -10,6 +10,12 @@ services:
       - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ludocloud"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
 
   ludocloud-backend:
     build:
@@ -17,7 +23,8 @@ services:
       dockerfile: infra/docker/backend.Dockerfile
     container_name: ludocloud-backend
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     environment:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/ludocloud?schema=public
       JWT_ACCESS_SECRET: dev_access_secret_change_me
@@ -32,8 +39,19 @@ services:
       BOOKING_CANCELLATION_HOURS: 2
       NODE_ENV: production
       PORT: 3000
+    restart: unless-stopped
+    command:
+      - sh
+      - -c
+      - until npm run prisma:migrate:deploy; do echo 'Database non pronto, ritento...'; sleep 2; done; npm run prisma:seed; exec node dist/src/main.js
     ports:
       - "3000:3000"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/api/v1/health/ready >/dev/null 2>&1 || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
 
   ludocloud-frontend:
     build:
@@ -41,7 +59,9 @@ services:
       dockerfile: infra/docker/frontend.Dockerfile
     container_name: ludocloud-frontend
     depends_on:
-      - ludocloud-backend
+      ludocloud-backend:
+        condition: service_healthy
+    restart: unless-stopped
     ports:
       - "80:80"
 
