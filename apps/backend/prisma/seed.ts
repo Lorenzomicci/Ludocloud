@@ -13,7 +13,13 @@ async function main() {
 
   await prisma.user.upsert({
     where: { email: 'admin@ludocloud.local' },
-    update: {},
+    update: {
+      passwordHash,
+      fullName: 'Admin Ludocloud',
+      role: UserRole.ADMIN,
+      status: UserStatus.ACTIVE,
+      phone: '+390000000001',
+    },
     create: {
       email: 'admin@ludocloud.local',
       passwordHash,
@@ -26,7 +32,13 @@ async function main() {
 
   const staff = await prisma.user.upsert({
     where: { email: 'staff@ludocloud.local' },
-    update: {},
+    update: {
+      passwordHash,
+      fullName: 'Staff Ludocloud',
+      role: UserRole.STAFF,
+      status: UserStatus.ACTIVE,
+      phone: '+390000000002',
+    },
     create: {
       email: 'staff@ludocloud.local',
       passwordHash,
@@ -39,7 +51,13 @@ async function main() {
 
   const memberUser = await prisma.user.upsert({
     where: { email: 'member@ludocloud.local' },
-    update: {},
+    update: {
+      passwordHash,
+      fullName: 'Membro Demo',
+      role: UserRole.MEMBER,
+      status: UserStatus.ACTIVE,
+      phone: '+390000000003',
+    },
     create: {
       email: 'member@ludocloud.local',
       passwordHash,

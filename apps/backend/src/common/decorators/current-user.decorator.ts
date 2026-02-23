@@ -1,6 +1,6 @@
 /**
  * File: apps\backend\src\common\decorators\current-user.decorator.ts
- *   
+ *
  */
 
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';

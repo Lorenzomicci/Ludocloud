@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\auth\jwt.strategy.ts
- *   
  */
 
 import { Injectable } from '@nestjs/common';

@@ -1,6 +1,6 @@
 /**
  * File: apps\backend\src\common\decorators\public.decorator.ts
- *   
+ *
  */
 
 import { SetMetadata } from '@nestjs/common';
