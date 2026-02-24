@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\users\users.controller.ts
- *   
  */
 
 import { Controller, Get } from '@nestjs/common';

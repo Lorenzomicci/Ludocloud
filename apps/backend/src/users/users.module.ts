@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\users\users.module.ts
- *   
  */
 
 import { Module } from '@nestjs/common';

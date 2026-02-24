@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\tables\dto\table-availability-query.dto.ts
- *   
  */
 
 import { IsISO8601, IsOptional } from 'class-validator';

@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\tables\dto\create-table.dto.ts
- *   
  */
 
 import {

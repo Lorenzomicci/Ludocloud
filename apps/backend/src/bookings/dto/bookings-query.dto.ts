@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\bookings\dto\bookings-query.dto.ts
- *   
  */
 
 import { BookingStatus } from '@prisma/client';

@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\tables\tables.module.ts
- *   
  */
 
 import { Module } from '@nestjs/common';

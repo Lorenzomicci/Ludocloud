@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\tables\tables.controller.ts
- *   
  */
 
 import {

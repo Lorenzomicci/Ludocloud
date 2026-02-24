@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\bookings\dto\create-booking.dto.ts
- *   
  */
 
 import {

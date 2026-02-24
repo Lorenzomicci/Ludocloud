@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\tables\dto\update-table.dto.ts
- *   
  */
 
 import {

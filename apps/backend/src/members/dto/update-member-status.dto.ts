@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\members\dto\update-member-status.dto.ts
- *   
  */
 
 import { UserStatus } from '@prisma/client';

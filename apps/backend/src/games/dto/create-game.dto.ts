@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\games\dto\create-game.dto.ts
- *   
  */
 
 import {

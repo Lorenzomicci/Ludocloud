@@ -1,6 +1,5 @@
 /**
  * File: apps\backend\src\games\dto\update-game.dto.ts
- *   
  */
 
 import {
