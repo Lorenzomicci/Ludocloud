@@ -8,9 +8,6 @@ Applicazione **SPA + backend API + PostgreSQL** per la gestione di una ludoteca,
 - DBMS: PostgreSQL
 - Cloud-native: Docker + Kubernetes (k3d)
 - DevOps: GitHub Actions CI + deploy locale scriptato
-
-## Allineamento alla traccia d'esame
-Questo repository copre i requisiti minimi richiesti per l'esame:
 - Frontend web: SPA Angular (`apps/frontend`)
 - Backend API: NestJS REST (`apps/backend`)
 - Database: PostgreSQL con Prisma ORM (`apps/backend/prisma`)
@@ -70,15 +67,15 @@ Endpoint dopo deploy:
 - Frontend: `http://localhost:8080/`
 - API health: `http://localhost:8080/api/v1/health/ready`
 
-Smoke test:
+test:
 - `npm run smoke:test`
 
-## Guida alla parte cloud (esame)
+## Parte cloud
 La traccia accetta deploy su cloud provider oppure in locale. Questo progetto supporta entrambe le modalita "cloud-native" in locale:
-- `Docker Compose` (demo piu rapida/stabile)
-- `Kubernetes su k3d` (dimostrazione piu completa lato cloud)
+- `Docker Compose`
+- `Kubernetes su k3d`
 
-### Opzione A (consigliata per demo live stabile): Docker Compose
+### Opzione A : Docker Compose
 Avvio completo (DB + backend + frontend):
 - `docker compose -f infra/docker/docker-compose.yml up -d`
 
@@ -92,7 +89,7 @@ Cosa dimostra in ottica cloud:
 - configurazione via variabili d'ambiente
 - inizializzazione automatica backend con migrazioni + seed (`docker-compose.yml`)
 
-### Opzione B (piu "cloud-native"): Kubernetes con k3d
+### Opzione B: Kubernetes con k3d
 Deploy completo:
 - `npm run deploy:local`
 
@@ -107,37 +104,13 @@ Cosa dimostra in ottica cloud:
 - readiness/liveness checks e rollout controllato
 - HPA e ingress (`infra/k8s/hpa.yaml`, `infra/k8s/ingress.yaml`)
 
-### Componenti cloud da evidenziare durante la presentazione
+### Componenti cloud
 - Configurazione applicativa: `infra/k8s/configmap.yaml`
 - Secret applicativi: `infra/k8s/secret.yaml`
 - Persistenza DB (PostgreSQL): `infra/k8s/postgres.yaml`
 - Deploy backend/frontend: `infra/k8s/backend.yaml`, `infra/k8s/frontend.yaml`
 - Automazione deploy locale: `scripts/deploy-local.ps1`
 - Smoke test post-deploy: `scripts/smoke-test.ps1`
-
-## Checklist demo/pitch (10 minuti)
-Scaletta consigliata per la presentazione finale:
-1. Presentazione rapida del problema e obiettivo dell'app (30-60s)
-2. Architettura (frontend, backend, DB, flusso API) (1-2 min)
-3. Parte cloud: Docker/K8s, config/secret, health check, seed (2 min)
-4. Demo live:
-   - login con utente demo
-   - visualizzazione catalogo/gestione
-   - operazione chiave (es. prenotazione)
-   - health endpoint
-5. CI e test eseguiti in repository (1 min)
-6. Limiti/miglioramenti futuri (30-60s)
-
-Suggerimento pratico per l'esame:
-- prepara una demo "principale" (k3d) e una demo "fallback" (Docker Compose)
-- tieni pronti i comandi di avvio in un file/slide per evitare errori di digitazione
-- verifica prima della demo che il seed sia presente (utenti demo sotto)
-
-## Consegna e adempimenti esame (promemoria)
-- Repository pubblico (GitHub/GitLab) con sorgenti e documentazione
-- Comunicazione del repository via email ai docenti
-- Consegna almeno 7 giorni prima della data d'esame
-- Consigliato: includere slide PDF e screenshot architettura nel repository
 
 ## API principali
 - `POST /api/v1/auth/register`
