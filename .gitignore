@@ -24,3 +24,5 @@ Thumbs.db
 docs/
 
 *.exe
+
+ludocloud-kubeconfig.yaml

@@ -13,7 +13,8 @@
     "test:backend": "npm --prefix apps/backend run test -- --runInBand",
     "test:backend:integration": "npm --prefix apps/backend run test:integration",
     "lint:backend": "npm --prefix apps/backend run lint",
-    "deploy:local": "powershell -ExecutionPolicy Bypass -File ./scripts/deploy-local.ps1",
-    "smoke:test": "powershell -ExecutionPolicy Bypass -File ./scripts/smoke-test.ps1"
+    "deploy:local": "bash ./scripts/deploy-local.sh",
+    "deploy:akamai": "bash ./scripts/deploy-akamai.sh",
+    "smoke:test": "pwsh -ExecutionPolicy Bypass -File ./scripts/smoke-test.ps1"
   }
 }

@@ -71,9 +71,10 @@ test:
 - `npm run smoke:test`
 
 ## Parte cloud
-La traccia accetta deploy su cloud provider oppure in locale. Questo progetto supporta entrambe le modalita "cloud-native" in locale:
+La traccia accetta deploy su cloud provider oppure in locale. Questo progetto supporta:
 - `Docker Compose`
 - `Kubernetes su k3d`
+- `Kubernetes su cluster remoto (es. Akamai LKE)`
 
 ### Opzione A : Docker Compose
 Avvio completo (DB + backend + frontend):
@@ -93,9 +94,26 @@ Cosa dimostra in ottica cloud:
 Deploy completo:
 - `npm run deploy:local`
 
+### Opzione C: Deploy su cluster remoto (es. Akamai LKE)
+Portale:
+- Akamai Cloud Manager: `https://cloud.linode.com`
+
+Prerequisiti:
+- `kubectl` configurato verso il cluster target (`KUBECONFIG` o context attivo)
+- immagini backend/frontend gia` pushate su registry raggiungibile dal cluster
+
+Ingress (una tantum, se non presente nel cluster):
+- `kubectl apply -f infra/k8s/traefik.yaml`
+- attesa IP pubblico: `kubectl -n traefik get svc traefik -w`
+
+Comando:
+- `bash scripts/deploy-akamai.sh --context <ctx> --backend-image <registry>/ludocloud-backend:<tag> --frontend-image <registry>/ludocloud-frontend:<tag>`
+
 Endpoint:
-- Frontend: `http://localhost:8080`
-- API health: `http://localhost:8080/api/v1/health/ready`
+- recupero IP pubblico: `kubectl -n traefik get svc traefik`
+- https://www.akamai.com/it
+- Frontend: `http://<EXTERNAL-IP>/`
+- API health: `http://<EXTERNAL-IP>/api/v1/health/ready`
 
 Cosa dimostra in ottica cloud:
 - orchestrazione con Kubernetes
@@ -109,7 +127,7 @@ Cosa dimostra in ottica cloud:
 - Secret applicativi: `infra/k8s/secret.yaml`
 - Persistenza DB (PostgreSQL): `infra/k8s/postgres.yaml`
 - Deploy backend/frontend: `infra/k8s/backend.yaml`, `infra/k8s/frontend.yaml`
-- Automazione deploy locale: `scripts/deploy-local.ps1`
+- Automazione deploy locale: `scripts/deploy-local.sh`
 - Smoke test post-deploy: `scripts/smoke-test.ps1`
 
 ## API principali
